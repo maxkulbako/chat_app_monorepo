@@ -1,4 +1,4 @@
-import { createPayloadAction } from '../_helpers';
+import { createPayloadAction } from '../_utils';
 
 export const actionSendMessage = createPayloadAction('messages.send');
 export const actionDeleteMessage = createPayloadAction('messages.delete');
