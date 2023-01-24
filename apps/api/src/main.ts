@@ -1,9 +1,9 @@
-import * as express from 'express';
-import * as cors from 'cors';
+import express from 'express';
+import cors from 'cors';
 import { createServer } from 'http';
 import { Server as SocketServer } from 'socket.io';
 
-import { handleConnection } from './app/ws-handlers';
+import { handleConnection } from './app/ws-handlers/handleConnection';
 
 // Common configs
 const port = process.env.port || 3001;
