@@ -7,9 +7,9 @@ import * as actions from './actions';
 export default createWSMiddleware({
   connectionUrl: WEB_SOCKET_CONNECTION_URL,
   actions: {
-    CONNECT: actions.socketsConnect,
-    DISCONNECT: actions.socketsDisconnect,
-    EMIT: actions.socketsEmit,
+    connect: actions.socketsConnect.TYPE,
+    disconnect: actions.socketsDisconnect.TYPE,
+    emit: actions.socketsEmit.TYPE,
   },
   handlers: {},
 });

@@ -9,9 +9,10 @@ import Grid from '@mui/material/Grid';
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { actionSendMessage, actionDeleteMessage, actionDeleteAllMessages } from '../../../store/chat/actions';
+import { socketsConnect, socketsDisconnect } from '../../../store/sockets/actions'
 import { BasicSpeedDial, ChatHeader } from './components';
 
-export function ChatRoomView ({ chatList, sendMessage, deleteMessage, deleteAll, mainUser }) {
+export function ChatRoomView ({ chatList, sendMessage, deleteMessage, deleteAll, mainUser, connect, disconnect }) {
   const { roomId } = useParams();
   const activeRoom = chatList.find(item => item.id === roomId);
   const name = activeRoom.name;
@@ -21,6 +22,8 @@ export function ChatRoomView ({ chatList, sendMessage, deleteMessage, deleteAll,
     <Grid container direction='column' justifyContent='space-between' sx={{ height: '100%', flexWrap: 'noWrap' }} item xs>
       <Grid>
         <ChatHeader name={name} avatar={avatar}/>
+        <button onClick={connect}>Connect</button>
+        <button onClick={disconnect}>Disconnect</button>   
         <Divider/>
       </Grid>
       <Grid sx={{ overflow: 'auto' }}>
@@ -69,7 +72,9 @@ const mapState = state => ({
 const mapDispatch = (dispatch) => ({
   sendMessage: (text) => dispatch(actionSendMessage(text)),
   deleteMessage: (message) => dispatch(actionDeleteMessage(message)),
-  deleteAll: (messages) => dispatch(actionDeleteAllMessages(messages))
+  deleteAll: (messages) => dispatch(actionDeleteAllMessages(messages)), 
+  connect: () => dispatch(socketsConnect()),
+  disconnect: () => dispatch(socketsDisconnect())
 });
 
 export const ChatRoom = connect(mapState, mapDispatch)(ChatRoomView);
