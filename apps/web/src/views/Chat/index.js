@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import { Sidebar } from './SideBar';
-import { selectChatList, selectMainUser } from '@store/chat';
+import { selectChatList, selectMainUser } from '../../store/chat';
 import { connect } from 'react-redux';
 import { Box, Grid } from '@mui/material';
 import { styled } from '@mui/material/styles';

@@ -1,4 +1,4 @@
-import { selectChatList, selectMainUser } from '@store/chat';
+import { selectChatList, selectMainUser } from '../../../store/chat';
 import { useParams } from 'react-router-dom';
 import { Message } from './message';
 import { Input } from './input';
