@@ -1,9 +1,9 @@
 import { WEB_SOCKET_CONNECTION_URL } from '../constants';
 
 import { createWSMiddleware } from '../_utils/middlewares/createWSMiddleware';
+import { actionReceiveWSMessage } from '../chat/actions';
 
 import * as actions from './actions';
-import { actionReceiveWSMessage } from '../chat/actions';
 
 export default createWSMiddleware({
   connectionUrl: WEB_SOCKET_CONNECTION_URL,
@@ -14,8 +14,6 @@ export default createWSMiddleware({
   },
   handlers: {
     MessageToClient: (dispatch, data) => {
-      console.log(dispatch)
-      console.log(data)
       dispatch(actionReceiveWSMessage(data))
     }
   },

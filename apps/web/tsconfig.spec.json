@@ -3,7 +3,10 @@
   "compilerOptions": {
     "outDir": "../../dist/out-tsc",
     "module": "commonjs",
-    "types": ["jest", "node"]
+    "types": ["jest", "node"],
+    "paths": {
+      "@store": ["apps/web/src/store/index.js"],
+    }
   },
   "include": [
     "jest.config.ts",

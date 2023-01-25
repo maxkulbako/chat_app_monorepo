@@ -81,7 +81,7 @@ const mapDispatch = (dispatch) => ({
   deleteAll: (messages) => dispatch(actionDeleteAllMessages(messages)), 
   wsConnect: () => dispatch(socketsConnect()),
   wsDisconnect: () => dispatch(socketsDisconnect()),
-  wsSend: (message) => dispatch(socketsEmit({wsType: 'MessageToServer', wsData: message}))
+  wsSend: (message) => dispatch(socketsEmit('MessageToServer', message))
 });
 
 export const ChatRoom = connect(mapState, mapDispatch)(ChatRoomView);

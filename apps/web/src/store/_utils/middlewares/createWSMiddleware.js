@@ -18,9 +18,7 @@ export function createWSMiddleware({ connectionUrl, actions, handlers, }) {
     }
 
     function disconnect() {
-      console.log(socket.connected);
       socket?.disconnect();
-      console.log(socket.connected);
       socket = null;
     }
 

@@ -6,7 +6,7 @@ export function handleConnection(socket, server) {
 
   socket.on('MessageToServer', (msgData) => {
     server.emit('MessageToClient', {
-      text: createMockMessage({
+      data: createMockMessage({
         name: 'Max Kulbako',
         secondary: msgData.text,
       }),

@@ -1,16 +1,4 @@
-
-
-export function createWSProcessorMiddleware({
-
-}: IWSProcessorMiddlewareParams) {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  return store => next => action => {
-    next(action);
-  };
+export function createWSProcessorMiddleware(){
+  return null;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-interface IWSProcessorMiddlewareParams {
-
-}

@@ -1,4 +1,4 @@
-import { createMockMessage, createMockChat } from '../../core/mock/index';
+import { createMockChat } from '../../core/mock';
 import * as actions from './actions';
 
 const initialState = {
@@ -78,25 +78,6 @@ const initialState = {
 
 export function chatRoomsReducer (state = initialState, action) {
   switch (action.type) {
-  case actions.actionSendMessage.TYPE:
-    return {
-      ...state,
-      list: state.list.map(room => {
-        if (room.id === action.payload.roomId) {
-          return {
-            ...room,
-            messages: [
-              ...room.messages,
-              createMockMessage({
-                name: state.mainUser.name,
-                secondary: action.payload.text
-              })]
-          };
-        }
-        return room;
-      })
-    };
-  
   case actions.actionReceiveWSMessage.TYPE:
     return {
       ...state,
@@ -106,7 +87,7 @@ export function chatRoomsReducer (state = initialState, action) {
             ...room,
             messages: [
               ...room.messages,
-              action.payload.text  
+              action.payload.data
             ]
           };
         }

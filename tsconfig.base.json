@@ -16,6 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@mock": ["apps/web/src//core/mock/index.js"],
+      "@store": ["apps/web/src//store/index.js"]
     }
   },
   "exclude": ["node_modules", "tmp"]
