@@ -9,10 +9,10 @@ import Grid from '@mui/material/Grid';
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { actionSendMessage, actionDeleteMessage, actionDeleteAllMessages } from '../../../store/chat/actions';
-import { socketsConnect, socketsDisconnect } from '../../../store/sockets/actions'
+import { socketsConnect, socketsDisconnect, socketsEmit } from '../../../store/sockets/actions'
 import { BasicSpeedDial, ChatHeader } from './components';
 
-export function ChatRoomView ({ chatList, sendMessage, deleteMessage, deleteAll, mainUser, connect, disconnect }) {
+export function ChatRoomView ({ chatList, sendMessage, deleteMessage, deleteAll, mainUser, connect, disconnect, send }) {
   const { roomId } = useParams();
   const activeRoom = chatList.find(item => item.id === roomId);
   const name = activeRoom.name;
@@ -23,7 +23,8 @@ export function ChatRoomView ({ chatList, sendMessage, deleteMessage, deleteAll,
       <Grid>
         <ChatHeader name={name} avatar={avatar}/>
         <button onClick={connect}>Connect</button>
-        <button onClick={disconnect}>Disconnect</button>   
+        <button onClick={disconnect}>Disconnect</button>
+        <button onClick={() => send()}>SEND</button>
         <Divider/>
       </Grid>
       <Grid sx={{ overflow: 'auto' }}>
@@ -58,7 +59,7 @@ export function ChatRoomView ({ chatList, sendMessage, deleteMessage, deleteAll,
       </Grid>
       <Grid>
         <Divider/>
-        <Input roomId={roomId} sendMessage={sendMessage}/>
+        <Input roomId={roomId} sendMessage={send}/>
       </Grid>
     </Grid>
   );
@@ -70,11 +71,12 @@ const mapState = state => ({
 });
 
 const mapDispatch = (dispatch) => ({
-  sendMessage: (text) => dispatch(actionSendMessage(text)),
+  // sendMessage: (text) => dispatch(actionSendMessage(text)),
   deleteMessage: (message) => dispatch(actionDeleteMessage(message)),
   deleteAll: (messages) => dispatch(actionDeleteAllMessages(messages)), 
   connect: () => dispatch(socketsConnect()),
-  disconnect: () => dispatch(socketsDisconnect())
+  disconnect: () => dispatch(socketsDisconnect()),
+  send: (message) => dispatch(socketsEmit({wsType: 'MessageToServer', wsData: message}))
 });
 
 export const ChatRoom = connect(mapState, mapDispatch)(ChatRoomView);

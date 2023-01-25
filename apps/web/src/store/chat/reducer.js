@@ -96,7 +96,24 @@ export function chatRoomsReducer (state = initialState, action) {
         return room;
       })
     };
-
+  
+  case actions.actionReceiveWSMessage.TYPE:
+    return {
+      ...state,
+      list: state.list.map(room => {
+        if (room.id === action.payload.roomId) {
+          return {
+            ...room,
+            messages: [
+              ...room.messages,
+              action.payload.text  
+            ]
+          };
+        }
+        return room;
+      })
+    };
+  
   case actions.actionDeleteMessage.TYPE:
     return {
       ...state,
